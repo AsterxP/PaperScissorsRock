@@ -1,0 +1,69 @@
+<script>
+  function computerPlay() {
+    let random = [
+    "Rock",
+    "Paper",
+    "Scissors"
+    ];
+
+    return random[Math.floor(Math.random()*random.length)]
+  }
+
+  function playRound(playerSelection, computerSelection) {
+    switch(true) {
+      case playerSelection.toUpperCase() === computerSelection.toUpperCase():
+        return `It is a Tie, Try Again`;
+        break;
+      case playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "PAPER":
+        return `Your loss! Paper beats Rock`;
+        break;       
+      case playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "SCISSORS":
+        return `Your win! Rock beats Scissors`;
+        break; 
+      case playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "SCISSORS":
+        return `Your loss! Scissors beats Paper`;
+        break;
+      case playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "ROCK":
+        return `Your win! Paper beats Rock`;
+        break; 
+      case playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "ROCK":
+        return `Your loss! Rock beats Scissors`;
+        break;
+      case playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "PAPER":
+        return `Your win! Scissors beats Paper`;
+        break;        
+    }
+  }
+
+
+
+  function game() {
+    const playerSelection = window.prompt(`Enter`);
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++){
+      const computerSelection = computerPlay();
+      let result = playRound(playerSelection, computerSelection);
+      console.log(result);
+      if (result.includes(`win`)) {
+        playerScore++;
+        console.log(playerScore);
+      } 
+      else if (result.includes(`loss`)) {
+        computerScore++;
+        console.log(computerScore);
+      }
+    }
+    if (playerScore > computerScore) {
+      return `You win ${playerScore} games to ${computerScore}`;
+    } else if (playerScore < computerScore) {
+      return `You lose ${computerScore} games to ${playerScore}`;
+    } else {
+      return `It is a Draw, ${playerScore} all`;
+    }
+  }
+
+
+ 
+</script>
+
