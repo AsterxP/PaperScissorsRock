@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Scissors Rock</title>
+</head>
+<body id="body">
+  <button>Paper</button>
+  <button>Scissors</button>
+  <button>Rock</button>
+</body>
+</html>
+
+
+
 <script>
   function computerPlay() {
     let random = [
@@ -35,35 +52,38 @@
     }
   }
 
+  let playerScore = 0;
+  let computerScore = 0;
+  const body = document.querySelector(`#body`)
+  divResult = document.createElement('Div')
 
-
-  function game() {
-    const playerSelection = window.prompt(`Enter`);
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++){
-      const computerSelection = computerPlay();
-      let result = playRound(playerSelection, computerSelection);
-      console.log(result);
-      if (result.includes(`win`)) {
-        playerScore++;
-        console.log(playerScore);
-      } 
-      else if (result.includes(`loss`)) {
-        computerScore++;
-        console.log(computerScore);
-      }
+  function game(player) {
+    let playerSelection = player;
+    let computerSelection = computerPlay();
+    let result = playRound(playerSelection, computerSelection);
+    if (result.includes(`win`)) {
+      playerScore++;
+    } 
+    else if (result.includes(`loss`)) {
+      computerScore++;
     }
     if (playerScore > computerScore) {
-      return `You win ${playerScore} games to ${computerScore}`;
+      divResult.textContent = `You win ${playerScore} games to ${computerScore}`;
     } else if (playerScore < computerScore) {
-      return `You lose ${computerScore} games to ${playerScore}`;
+      divResult.textContent = `You lose ${computerScore} games to ${playerScore}`;
     } else {
-      return `It is a Draw, ${playerScore} all`;
+      divResult.textContent = `It is a Draw, ${playerScore} all`;
     }
+    body.appendChild(divResult);
+    
   }
 
+    const btn = document.querySelectorAll('button');
+    btn.forEach((button) => {
+      button.addEventListener('click' , () => {
+      game(button.textContent);
+      });
+    });
+    
 
- 
 </script>
-
