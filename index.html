@@ -56,26 +56,31 @@
   let computerScore = 0;
   const body = document.querySelector(`#body`)
   divResult = document.createElement('Div')
-
+  
   function game(player) {
     let playerSelection = player;
     let computerSelection = computerPlay();
     let result = playRound(playerSelection, computerSelection);
+    divResult.textContent = result
+    body.appendChild(divResult);
     if (result.includes(`win`)) {
       playerScore++;
     } 
     else if (result.includes(`loss`)) {
       computerScore++;
     }
-    if (playerScore > computerScore) {
-      divResult.textContent = `You win ${playerScore} games to ${computerScore}`;
-    } else if (playerScore < computerScore) {
-      divResult.textContent = `You lose ${computerScore} games to ${playerScore}`;
-    } else {
-      divResult.textContent = `It is a Draw, ${playerScore} all`;
+    if (playerScore === 5 || computerScore === 5){
+      if (playerScore > computerScore) {
+        divResult.textContent = `You win ${playerScore} games to ${computerScore}`;
+      } else if (playerScore < computerScore) {
+        divResult.textContent = `You lose ${computerScore} games to ${playerScore}`;
+      } else {
+        divResult.textContent = `It is a Draw, ${playerScore} all`;
+      }
+      body.appendChild(divResult);
+      playerScore = 0;
+      computerScore = 0;
     }
-    body.appendChild(divResult);
-    
   }
 
     const btn = document.querySelectorAll('button');
